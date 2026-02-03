@@ -10,7 +10,11 @@
 </head>
 <body>
   <!-- Pembuat code: https://codepen.io/mdusmanansari/pen/BamepLe -->
+    <audio autoplay loop>
+        <source src="../song/Petalas_Esquecidas.mp3" type="audio/mpeg">
+    </audio>
     <div class="night"></div>
+    <div class="binary-rain"></div>
     <div class="flowers">
       <div class="flower flower--1">
         <div class="flower__leafs flower__leafs--1">
@@ -308,5 +312,20 @@
       </div>
     </div>
     <script src="main-simple.js"></script>
+    <script>
+        function createBinaryRain() {
+            const container = document.querySelector('.binary-rain');
+            for (let i = 0; i < 50; i++) {
+                const binary = document.createElement('div');
+                binary.className = 'binary-digit';
+                binary.textContent = Math.random() > 0.5 ? '1' : '0';
+                binary.style.left = Math.random() * 100 + '%';
+                binary.style.animationDelay = Math.random() * 5 + 's';
+                binary.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                container.appendChild(binary);
+            }
+        }
+        createBinaryRain();
+    </script>
   </body>
 </html>
