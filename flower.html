@@ -313,19 +313,57 @@
     </div>
     <script src="main-simple.js"></script>
     <script>
-        function createBinaryRain() {
+        function createFireworks() {
             const container = document.querySelector('.binary-rain');
-            for (let i = 0; i < 50; i++) {
-                const binary = document.createElement('div');
-                binary.className = 'binary-digit';
-                binary.textContent = Math.random() > 0.5 ? '1' : '0';
-                binary.style.left = Math.random() * 100 + '%';
-                binary.style.animationDelay = Math.random() * 5 + 's';
-                binary.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                container.appendChild(binary);
+            
+            function launchFirework() {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = Math.random() * 100 + '%';
+                firework.style.bottom = '0px';
+                container.appendChild(firework);
+                
+                // Animação do foguete subindo
+                const rocketHeight = Math.random() * 300 + 200;
+                firework.style.transition = 'bottom 1.5s ease-out';
+                firework.style.bottom = rocketHeight + 'px';
+                
+                // Explosão após 1.5s
+                setTimeout(() => {
+                    explodeFirework(firework);
+                }, 1500);
             }
+            
+            function explodeFirework(firework) {
+                const rect = firework.getBoundingClientRect();
+                firework.remove();
+                
+                // Criar estrelas da explosão
+                for (let i = 0; i < 15; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    star.innerHTML = '★';
+                    star.style.left = rect.left + 'px';
+                    star.style.top = rect.top + 'px';
+                    
+                    const angle = (i / 15) * Math.PI * 2;
+                    const velocity = Math.random() * 100 + 50;
+                    star.style.setProperty('--vx', Math.cos(angle) * velocity + 'px');
+                    star.style.setProperty('--vy', Math.sin(angle) * velocity + 'px');
+                    
+                    container.appendChild(star);
+                    
+                    // Remover estrela após animação
+                    setTimeout(() => star.remove(), 3000);
+                }
+            }
+            
+            // Lançar fogos periodicamente
+            setInterval(launchFirework, 2000);
+            launchFirework(); // Primeiro foguete imediato
         }
-        createBinaryRain();
+        
+        createFireworks();
     </script>
   </body>
 </html>

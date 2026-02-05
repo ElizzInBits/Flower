@@ -1555,7 +1555,7 @@ body {
   animation-play-state: paused !important;
 } /*# sourceMappingURL=main.css.map */
 
-/* Binary Rain Effect */
+/* Fireworks Effect */
 .binary-rain {
   position: fixed;
   top: 0;
@@ -1566,21 +1566,31 @@ body {
   z-index: 1;
 }
 
-.binary-digit {
+.firework {
   position: absolute;
-  top: -20px;
-  color: #6bf0ff;
-  font-family: 'Courier New', monospace;
-  font-size: 16px;
-  font-weight: bold;
-  opacity: 0.4;
-  text-shadow: 0 0 10px #6bf0ff;
-  animation: fall linear infinite;
+  width: 4px;
+  height: 20px;
+  background: linear-gradient(to top, #ff6b6b, #ffd93d);
+  border-radius: 2px;
+  box-shadow: 0 0 10px #ffd93d;
 }
 
-@keyframes fall {
-  to {
-    transform: translateY(100vh);
+.star {
+  position: fixed;
+  font-size: 20px;
+  color: #6bf0ff;
+  text-shadow: 0 0 10px #6bf0ff;
+  animation: starFall 3s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes starFall {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--vx), var(--vy)) scale(0.3);
     opacity: 0;
   }
 }
